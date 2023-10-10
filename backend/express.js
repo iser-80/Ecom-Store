@@ -185,10 +185,6 @@ app.post("/api/users/logout", async (req, res) => {
     res.status(200).json({message: 'logged out successfully'})
 });
 
-app.put("/api/users/:id", verifyToken, admin, (req, res) => {
-    res.send("Update user by ID");
-});
-
 app.put("/api/users/profile", verifyToken, async(req, res) => {
     const user = await User.findById(req.user._id)
 
@@ -212,6 +208,12 @@ app.put("/api/users/profile", verifyToken, async(req, res) => {
         res.status(404).json('error')
     }
 });
+
+app.put("/api/users/:id", verifyToken, admin, (req, res) => {
+    res.send("Update user by ID");
+});
+
+
 
 app.delete("/api/users/:id", verifyToken, admin, (req, res) => {
     res.send("Delete user");
